@@ -7,7 +7,7 @@ body {
 }
 
 h1 {
-    color: #e91e63;
+    color: #090909;
 }
 
 .text-container {
@@ -25,16 +25,24 @@ textarea {
     padding: 10px;
     background-color: #fff0f5;
     font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+textarea:focus {
+    background-color: #fdbad7;
+    /* 超うすいピンク */
+    outline: none;
 }
 
 button {
     padding: 10px 20px;
     font-size: 18px;
-    background-color: #ff69b4;
+    background-color: #f69bd1;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .result-box {
@@ -43,7 +51,21 @@ button {
     border: 2px solid pink;
     background-color: #fffafc;
     border-radius: 10px;
-    min-height: 100px;
+    min-height: 200px;
+    /* ←高さを大きくしたよ！ */
     white-space: pre-wrap;
     text-align: left;
+    color: #333;
+    position: relative;
+}
+
+/* プレースホルダ風の文字（初期状態） */
+.result-box:empty::before {
+    content: "result！";
+    color: #aaa;
+    font-style: italic;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    pointer-events: none;
 }
