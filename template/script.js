@@ -1,19 +1,28 @@
 function compareTexts() {
-    const textA = document.getElementById("textA").value;
-    const textB = document.getElementById("textB").value;
-    const maxLength = Math.max(textA.length, textB.length);
+    const textA = document.getElementById("textA").value.split("\n");
+    const textB = document.getElementById("textB").value.split("\n");
+    const maxLines = Math.max(textA.length, textB.length);
     let result = "";
+    let correct = 0;
+    let wrong = 0;
 
-    for (let i = 0; i < maxLength; i++) {
-        const charA = textA[i] || "";
-        const charB = textB[i] || "";
+    for (let i = 0; i < maxLines; i++) {
+        const lineA = textA[i] || "";
+        const lineB = textB[i] || "";
 
-        if (charA === charB) {
-            result += charA;
+        if (lineA === lineB) {
+            result += `〇 ${lineB}\n`;
+            correct++;
         } else {
-            result += `<span style="background-color:pink;">${charB || " "}</span>`;
+            result += `☓ <span style="background-color:pink;">${lineB}</span>\n`;
+            wrong++;
         }
     }
 
-    document.getElementById("result").innerHTML = result;
+    const stats = `<div style="margin-top:10px; font-weight:bold;">
+        ✅ 一致行: ${correct}　❌ 不一致行: ${wrong}
+    </div>`;
+
+    // innerHTML にするため、改行を <br> に変換
+    document.getElementById("result").innerHTML = result.replace(/\n/g, "<br>") + stats;
 }
