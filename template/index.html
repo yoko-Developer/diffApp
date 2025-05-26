@@ -2,18 +2,37 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>テキスト比較ツール</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
     <h1>テキスト比較ツール</h1>
+
     <div class="text-container">
-        <textarea id="textA" placeholder="Text A"></textarea>
-        <textarea id="textB" placeholder="Text B"></textarea>
+        <textarea id="textA" placeholder="correct answer"></textarea>
+        <textarea id="textB" placeholder="reading text"></textarea>
     </div>
+
     <button onclick="compareTexts()">比較する</button>
-    <div id="result" class="result-box" placeholder="result"></div>
+
+    <div id="resultTable" class="result-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>正解</th>
+                    <th>読取</th>
+                </tr>
+            </thead>
+            <tbody id="resultBody">
+                <!-- JavaScriptでここに追加 -->
+            </tbody>
+        </table>
+    </div>
+
     <script src="script.js"></script>
-    
+</body>
+
+</html>
