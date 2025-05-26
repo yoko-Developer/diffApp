@@ -81,6 +81,7 @@ button:hover {
     border: 1px solid #ffc0cb;
     text-align: left;
     font-size: 16px;
+    white-space: pre-wrap; 
     word-wrap: break-word; /* 長い文を折り返す */
 }
 
