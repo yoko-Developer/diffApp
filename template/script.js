@@ -1,32 +1,38 @@
 function compareTexts() {
-    const textA = document.getElementById("textA").value.trim().split("\n");
-    const textB = document.getElementById("textB").value.trim().split("\n");
+    const textA = document.getElementById("textA").value.trim();
+    const textB = document.getElementById("textB").value.trim();
     const resultBody = document.getElementById("resultBody");
     resultBody.innerHTML = "";
 
-    const keywords = ["200%", "250%"];
-    const maxLength = Math.max(textA.length, textB.length);
+    const wordsA = textA.split(/\s+/); // 空白で単語分割
+    const wordsB = textB.split(/\s+/);
 
-    for (let i = 0; i < maxLength; i++) {
-        const a = textA[i] || "";
-        const b = textB[i] || "";
+    let matchCount = 0;
+    const totalWords = wordsB.length;
 
-        const isMatch = keywords.some(keyword =>
-            a.includes(keyword) && b.includes(keyword)
-        );
+    // 正解リストをコピー（使われたら削除）
+    const copyWordsA = [...wordsA];
 
-        const mark = isMatch ? "〇" : "☓";
+    const markedWords = wordsB.map(word => {
+        const matchIndex = copyWordsA.indexOf(word);
+        if (matchIndex !== -1) {
+            matchCount++;
+            copyWordsA.splice(matchIndex, 1); // 使った単語は削除
+            return word;
+        } else {
+            return `<span class="highlight">${word}</span>`;
+        }
+    });
 
-        const escapeHTML = str =>
-            str.replace(/[&<>"']/g, m => ({
-                "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-            }[m]));
+    // 表示部分
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+        <td>${markedWords.join(" ")}</td>
+        <td>${textA}</td>
+    `;
+    resultBody.appendChild(tr);
 
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td class="${isMatch ? 'match' : 'mismatch'}">${escapeHTML(b)}</td>
-            <td>${mark} ${escapeHTML(a)}</td>
-        `;
-        resultBody.appendChild(tr);
-    }
+    // 集計表示
+    const resultBox = document.getElementById("matchSummary");
+    resultBox.innerHTML = `一致単語数: <strong>${matchCount}</strong> / ${totalWords}`;
 }

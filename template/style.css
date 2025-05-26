@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; /* ゴシック体 */
     text-align: center;
     background-color: #fff8fa;
     margin: 0;
@@ -28,13 +28,22 @@ textarea {
     border-radius: 8px;
     background-color: #fff0f5;
     resize: vertical;
+    overflow-y: scroll;
 }
 
 textarea::placeholder {
     color: #cc6699;
     font-style: italic;
+    font-family: inherit; /* ゴシック体 */
 }
 
+.highlight {
+    background-color: #ff69b4; /* 蛍光ピンク */
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 0 3px;
+}
+    
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -62,14 +71,17 @@ button:hover {
 .result-box table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .result-box th,
 .result-box td {
+    width: 50%;
     padding: 8px 12px;
     border: 1px solid #ffc0cb;
     text-align: left;
     font-size: 16px;
+    word-wrap: break-word; /* 長い文を折り返す */
 }
 
 .result-box th {

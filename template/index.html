@@ -12,25 +12,28 @@
     <h1>テキスト比較ツール</h1>
 
     <div class="text-container">
-        <textarea id="textA" placeholder="correct answer"></textarea>
-        <textarea id="textB" placeholder="reading text"></textarea>
+        <textarea id="textA" placeholder="reading text"></textarea>
+        <textarea id="textB" placeholder="correct answer"></textarea>
     </div>
 
     <button onclick="compareTexts()">比較する</button>
 
-    <div id="resultTable" class="result-box">
-        <table>
-            <thead>
-                <tr>
-                    <th>正解</th>
-                    <th>読取</th>
-                </tr>
-            </thead>
-            <tbody id="resultBody">
-                <!-- JavaScriptでここに追加 -->
-            </tbody>
-        </table>
-    </div>
+    <!-- 表示するマッチ数 -->
+<div id="matchSummary" style="margin: 10px; font-size: 18px; color: #cc3366;"></div>
+
+<!-- 結果表示 -->
+<div class="result-box">
+    <table>
+        <thead>
+            <tr>
+                <th>読取</th>
+                <th>正解</th>
+            </tr>
+        </thead>
+        <tbody id="resultBody">
+        </tbody>
+    </table>
+</div>
 
     <script src="script.js"></script>
 </body>
