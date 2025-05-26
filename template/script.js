@@ -5,6 +5,7 @@ function compareTexts() {
     const maxLength = Math.max(correct.length, input.length);
     let correctHighlighted = "";
     let inputHighlighted = "";
+    let mismatchCount = 0;
 
     for (let i = 0; i < maxLength; i++) {
         const cChar = correct[i] || "";
@@ -16,6 +17,7 @@ function compareTexts() {
         } else {
             correctHighlighted += `<span class="mismatch">${escapeHtml(cChar)}</span>`;
             inputHighlighted += `<span class="mismatch">${escapeHtml(iChar)}</span>`;
+            mismatchCount++;
         }
     }
 
@@ -24,6 +26,12 @@ function compareTexts() {
             <td>${inputHighlighted}</td>
             <td>${correctHighlighted}</td>
         </tr>
+    `;
+
+    // カウント表示
+    document.getElementById("matchSummary").innerHTML = `
+        <strong>全文字数：</strong> ${maxLength}
+        <strong>間違いの数：</strong> ${mismatchCount}
     `;
 }
 
