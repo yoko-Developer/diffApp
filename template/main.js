@@ -18,13 +18,18 @@ function compareTexts() {
         const isMatch = inputLine === correctLine;
         if (isMatch) correctLineCount++;
 
+        const [displayInput, displayCorrect] = isMatch
+            ? [escapeHtml(inputLines[i] || ""), escapeHtml(correctLines[i] || "")]
+            : diffLine(inputLines[i] || "", correctLines[i] || "");
+
         resultHtml += `
             <tr class="${isMatch ? 'match-row' : 'mismatch-row'}">
-                <td>${escapeHtml(inputLines[i] || "")}</td>
-                <td>${escapeHtml(correctLines[i] || "")}</td>
+                <td>${displayInput}</td>
+                <td>${displayCorrect}</td>
                 <td style="text-align:center;">${isMatch ? "〇" : "×"}</td>
             </tr>
         `;
+        
     }
 
     document.getElementById("resultBody").innerHTML = resultHtml;
@@ -47,4 +52,48 @@ function escapeHtml(str) {
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
+}
+
+function diffLine(a, b) {
+    const aChars = [...a];
+    const bChars = [...b];
+    const m = aChars.length;
+    const n = bChars.length;
+
+    // DPテーブルを作成
+    const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (aChars[i] === bChars[j]) {
+                dp[i + 1][j + 1] = dp[i][j] + 1;
+            } else {
+                dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]);
+            }
+        }
+    }
+
+    // 後ろから復元しながら差分判定
+    let i = m, j = n;
+    let resultA = "";
+    let resultB = "";
+
+    while (i > 0 || j > 0) {
+        if (i > 0 && j > 0 && aChars[i - 1] === bChars[j - 1]) {
+            const c = escapeHtml(aChars[i - 1]);
+            resultA = c + resultA;
+            resultB = c + resultB;
+            i--;
+            j--;
+        } else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
+            resultA = `<span class="diff-highlight"></span>` + resultA;
+            resultB = `<span class="diff-highlight">${escapeHtml(bChars[j - 1])}</span>` + resultB;
+            j--;
+        } else if (i > 0 && (j === 0 || dp[i][j - 1] < dp[i - 1][j])) {
+            resultA = `<span class="diff-highlight">${escapeHtml(aChars[i - 1])}</span>` + resultA;
+            resultB = `<span class="diff-highlight"></span>` + resultB;
+            i--;
+        }
+    }
+
+    return [resultA, resultB];
 }
