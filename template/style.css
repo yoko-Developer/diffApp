@@ -80,7 +80,7 @@ button:hover {
     padding: 8px 12px;
     border: 1px solid #ffc0cb;
     text-align: left;
-    font-size: 16px;
+    font-size: 14px;
     white-space: pre-wrap; 
     word-wrap: break-word; /* 長い文を折り返す */
 }
@@ -95,6 +95,16 @@ button:hover {
 }
 
 .mismatch {
+    background-color: #ffe6e6;
+    color: #a33;
+}
+
+.result-box .match-row {
+    background-color: #d2ffd2;
+    color: #006400;
+}
+
+.result-box .mismatch-row {
     background-color: #ffe6e6;
     color: #a33;
 }
