@@ -3,7 +3,7 @@
   publish = "diffApp"
   # （ビルド不要なので build コマンドは空のまま）
 
-# すべてのリクエストを templates/index.html で受ける
+# すべてのリクエストを templates/index.html で受ける（Netlify が見る場所）
 [[redirects]]
   from = "/*"
   to = "/templates/index.html"
