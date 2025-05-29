@@ -1,0 +1,10 @@
+[build]
+  # ここで「diffApp」フォルダ全体」を公開コンテンツのルートにする
+  publish = "diffApp"
+  # （ビルド不要なので build コマンドは空のまま）
+
+# すべてのリクエストを templates/index.html で受ける
+[[redirects]]
+  from = "/*"
+  to = "/templates/index.html"
+  status = 200
