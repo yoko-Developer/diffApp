@@ -1,10 +1,7 @@
 [build]
-  # ここで「diffApp」フォルダ全体」を公開コンテンツのルートにする
-  publish = "diffApp"
-  # （ビルド不要なので build コマンドは空のまま）
+  publish = "templates"
 
-# すべてのリクエストを templates/index.html で受ける（Netlify が見る場所）
 [[redirects]]
   from = "/*"
-  to = "/templates/index.html"
+  to = "/index.html"
   status = 200
