@@ -18,14 +18,14 @@ function compareTexts() {
         const isMatch = inputLine === correctLine;
         if (isMatch) correctLineCount++;
 
-        const [displayInput, displayCorrect] = isMatch
-            ? [escapeHtml(inputLines[i] || ""), escapeHtml(correctLines[i] || "")]
-            : diffLine(inputLines[i] || "", correctLines[i] || "");
+        const [displayCorrect, displayInput] = isMatch
+            ? [escapeHtml(correctLines[i] || ""), escapeHtml(inputLines[i] || "")]
+            : diffLine(correctLines[i] || "", inputLines[i] || "");
 
         resultHtml += `
             <tr class="${isMatch ? 'match-row' : 'mismatch-row'}">
-                <td>${displayInput}</td>
-                <td>${displayCorrect}</td>
+                <td>${displayCorrect}</td>  <!-- 左列：正解 -->
+                <td>${displayInput}</td>    <!-- 右列：読取 -->
                 <td style="text-align:center;">${isMatch ? "〇" : "×"}</td>
             </tr>
         `;
