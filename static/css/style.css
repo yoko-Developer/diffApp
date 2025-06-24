@@ -103,8 +103,8 @@ button:hover {
 }
 
 .mismatch {
-    background-color: #ffe6e6;
-    color: #a33;
+    background-color: #fcbdf0;
+    color: rgba(170, 51, 150, 0.966);
 }
 
 .result-box .match-row {
@@ -113,7 +113,7 @@ button:hover {
 }
 
 .result-box .mismatch-row {
-    background-color: #ffe6e6;
+    background-color: #ffe6f0;
     color: #a33;
 }
 
